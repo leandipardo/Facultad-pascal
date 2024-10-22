@@ -4,22 +4,23 @@
 // # Si se ingresa el codigo 10382, con precio actual 40 y nuevo precio 44 deberá imprimir : "El aumento del precio del producto 10382 no supera el 10%"
 // ## Si se ingresa el codigo 32767, con precio actual 30 y nuevo precio 33,01 debera imprimir: " el aumento de precio del producto 32767 es superior al 10%".
 
-program PromedioAlumnos;
+program codigoAlmacen;
 var
-precioActual,nuevoPrecio:real;
-codigo:integer;
-continuar:boolean;
+    codigo:integer;
+    precioActual, nuevoPrecio:real;
 begin
-    continuar:=true;
-    while continuar do
-    begin
-        writeln('ingresa el codigo del producto.');
-        readln(codigo);
-        if codigo = 32767 then continuar:=false;
-        writeln('ingresa el precio actual.');
-        readln(precioActual);
-        writeln('ingresa el nuevo precio');
-        readln(nuevoPrecio);
-        if (precioActual + (nuevoPrecio * 0.1))< nuevoPrecio then writeln('el aumento del producto ',codigo,' es superior al 10%.');
-    end
+    codigo:=0;
+    repeat
+    writeln('Ingrese el codigo del producto:');
+    readln(codigo);
+    writeln('Ingrese el precio actual del producto:');
+    readln(precioActual);
+    writeln('Ingrese el nuevo precio del producto:');
+    readln(nuevoPrecio);
+    if((precioActual/10) <= (nuevoPrecio - precioActual)) then writeln('El aumento del precio del producto ',codigo,' supera el 10%.')
+    else writeln('El aumento de precio del producto ',codigo,' no supera el 10%.');
+    writeln();
+    writeln();
+    writeln();
+    until codigo = 32767;
 end.

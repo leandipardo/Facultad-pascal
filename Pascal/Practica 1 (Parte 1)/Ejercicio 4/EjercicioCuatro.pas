@@ -14,49 +14,39 @@
 // o La cantidad de alumnos cuyo promedio supera 6.5 (en el ejemplo anterior, se debería informar 1)
 // o EI porcentaje de alumnos destacados (alumnos con promedio mayor a 8,5) cuyo legajo sean
 // menor al valor 2500 (en el ejemplo anterior se debería informar 0%).
-
-program PromedioAlumnos;
+program lecturaLegajo;
 var
-legajo,cantidadAlumnos,alumnosAprobados,alumnosDestacados:integer;
-promedio,promedioGeneral,porcentaje:real;
-continuar:boolean;
+cantidadAlumnos,superiorSeis,superiorOcho,numeroLegajo:integer;
+porcentajeOcho,promedio:real;
 begin
-    continuar:=true;
-    legajo:= 0;
-    promedioGeneral:= 0;
-    cantidadAlumnos:=0;
-    alumnosAprobados:=0;
-    alumnosDestacados:=0;
-    repeat
-        writeln('Ingresa numero de legajo (o ingresa -1 para salir): ');
-        readln(legajo);
-        if legajo <> -1 then 
-        begin
-            writeln('Ingresa el promedio del alumno ', legajo, ': ');
-            readln(promedio);
-            if (promedio >= 0) and (promedio <= 10) then
-            begin
-                promedioGeneral:= promedioGeneral + promedio;
-                cantidadAlumnos := cantidadAlumnos + 1;
-                if (promedio >= 6.5) then 
-                begin 
-                    alumnosAprobados:=alumnosAprobados + 1;
-                    if (promedio >= 8.5) and (legajo < 2500) and (legajo >= 0) then alumnosDestacados:=alumnosDestacados + 1;
-                end
-            end
-        end
-        else continuar:= false;
-    until not continuar;
-    if cantidadAlumnos > 0 then
+superiorSeis:=0;
+porcentajeOcho:=0;
+cantidadAlumnos:=0;
+numeroLegajo:=0;
+superiorOcho:=0;
+while numeroLegajo <> -1 do
+begin
+    writeln('Ingrese el numero de legajo: ');
+    readln(numeroLegajo);
+    if(numeroLegajo <> -1) then
     begin
-        porcentaje:= ((alumnosDestacados / cantidadAlumnos) * 100);
-        promedioGeneral:= promedioGeneral / cantidadAlumnos;
-        writeln('_________________________________________________________________');
-        writeln('La cantidad de alumnos leida es de : ',cantidadAlumnos,'.');
-        writeln('El promedio general de los alumnos es de : ', promedioGeneral:0:2,'.');
-        writeln('La cantidad de alumnos aprobados es de : ', alumnosAprobados,'.');
-        writeln('La cantidad de alumnos destacados es de :', porcentaje:2:2,'%.');
-        writeln('_________________________________________________________________');
-        readln(legajo);
-    end
+        writeln('Ingrese el promedio: ');
+        readln(promedio);
+        cantidadAlumnos:=cantidadAlumnos + 1;
+        if (promedio > 6.5) then
+        begin
+            superiorSeis:= superiorSeis + 1;
+            if (promedio >= 8.5) and (numeroLegajo < 2500)then
+            begin
+                superiorOcho:= superiorOcho + 1;
+                porcentajeOcho:= (superiorOcho / cantidadAlumnos) * 100; 
+            end; 
+        end;
+    end;
+end;
+    writeln('Cantidad de alumnos leida: ', cantidadAlumnos);
+    writeln('Cantidad de alumnos con promedio superior a 6,5: ', superiorSeis);
+    writeln('Cantidad de alumnos con promedio superior a 8,5: ',superiorOcho); 
+    writeln('Porcentaje alumnos destacados: ',porcentajeOcho:0:2,'%');
+    readln();
 end.
